@@ -2,14 +2,14 @@
   "use strict";
   var fileInput = document.getElementById("file");
 
-  function encdec(readerFn, encodeDecodeFn, filenamerFn) {
+  function encdec(readerFnName, encodeDecodeFn, filenamerFn) {
     var reader = new FileReader(),
     file = fileInput.files[0];
 
     //gets triggered when reading is complete and the result is ready
     reader.onload = function() {
       var data = reader.result,
-      decodedData = this[encodeDecodeFn](data),
+      decodedData = encodeDecodeFn(data),
       blob = new Blob([decodedData]),
       ael = document.createElement('a');
 
@@ -25,17 +25,17 @@
     }
 
     //read
-    reader[readerFn](file);
+    reader[readerFnName](file);
   }
 
   //wire up the handlers
   document.getElementById("encode").addEventListener('click', function() {
-    encdec('readAsBinaryString', 'btoa', function(name) {
+    encdec('readAsBinaryString', btoa, function(name) {
       return name + ".base64"
     })
   });
   document.getElementById("decode").addEventListener('click', function() {
-    encdec('readAsText', 'atob', function(name) {
+    encdec('readAsText', atob, function(name) {
       return name.replace(/\.base64$/i, '')
     })
   });
