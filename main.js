@@ -2,6 +2,20 @@
   "use strict";
   var fileInput = document.getElementById("file");
 
+  function downloadFile(name, url) {
+    //download the file
+    var ael = document.createElement('a');
+
+    ael.setAttribute('href', url);
+    ael.setAttribute('download', name);
+    ael.style.display = 'none';
+    document.body.appendChild(ael);
+
+    ael.click();
+
+    document.body.removeChild(ael);
+  }
+
   //reads the file and encodes it into a base64 text
   function encode() {
     var reader = new FileReader(),
@@ -14,40 +28,22 @@
       //btoa => binarytoascii (binary to base64)
       blob = new Blob([encodedData]),
 
-      //download the file
-      ael = document.createElement('a');
-      ael.setAttribute('href', URL.createObjectURL(blob));
-      ael.setAttribute('download', file.name + ".txt");
-      ael.style.display = 'none';
-      document.body.appendChild(ael);
-      ael.click();
-      document.body.removeChild(ael);
+      downloadFile(file.name + ".txt", URL.createObjectURL(blob))
     }
 
     //read
     reader.readAsBinaryString(file);
   }
 
-  function binaryArrayFromBase64(encodedData) {
-    encodedData = atob(encodedData);
-    //asciitobinary => base64 to binary
-    var bytes = new Array(encodedData.length);
-    for (var i = 0; i < encodedData.length; i++) {
-      bytes[i] = encodedData.charCodeAt(i);
-    }
-    return new Uint8Array(bytes);
-  }
+  //source: http://stackoverflow.com/a/20151856/24105
+  function base64toBlob(base64Data) {
+    var sliceSize = 1024,
+    byteCharacters = atob(base64Data),
+    bytesLength = byteCharacters.length,
+    slicesCount = Math.ceil(bytesLength / sliceSize),
+    byteArrays = new Array(slicesCount);
 
-  function base64toBlob(base64Data, contentType) {
-    contentType = contentType || '';
-    var sliceSize = 1024;
-    var byteCharacters = atob(base64Data);
-    var bytesLength = byteCharacters.length;
-    var slicesCount = Math.ceil(bytesLength / sliceSize);
-    var byteArrays = new Array(slicesCount);
-
-    var sliceIndex = 0;
-    for (; sliceIndex < slicesCount; ++sliceIndex) {
+    for (var sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
       var begin = sliceIndex * sliceSize;
       var end = Math.min(begin + sliceSize, bytesLength);
 
@@ -58,9 +54,7 @@
       }
       byteArrays[sliceIndex] = new Uint8Array(bytes);
     }
-    return new Blob(byteArrays, {
-      type: contentType
-    });
+    return new Blob(byteArrays, {});
   }
 
   function decode() {
@@ -71,18 +65,7 @@
     reader.onload = function() {
       var data = reader.result,
       blob = base64toBlob(data),
-
-      ael = document.createElement('a');
-
-      ael.setAttribute('href', URL.createObjectURL(blob));
-      ael.setAttribute('download', file.name.replace(/\.txt$/i, ''));
-
-      ael.style.display = 'none';
-      document.body.appendChild(ael);
-
-      ael.click();
-
-      document.body.removeChild(ael);
+      downloadFile(file.name.replace(/\.txt$/i, ''), URL.createObjectURL(blob))
     }
 
     //read
