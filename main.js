@@ -26,9 +26,9 @@
       var data = reader.result,
       encodedData = btoa(data),
       //btoa => binarytoascii (binary to base64)
-      blob = new Blob([encodedData]),
+      blob = new Blob([encodedData]);
 
-      downloadFile(file.name + ".txt", URL.createObjectURL(blob))
+      downloadFile(file.name + ".txt", URL.createObjectURL(blob));
     }
 
     //read
@@ -64,8 +64,9 @@
     //gets triggered when reading is complete and the result is ready
     reader.onload = function() {
       var data = reader.result,
-      blob = base64toBlob(data),
-      downloadFile(file.name.replace(/\.txt$/i, ''), URL.createObjectURL(blob))
+      blob = base64toBlob(data);
+
+      downloadFile(file.name.replace(/\.txt$/i, ''), URL.createObjectURL(blob));
     }
 
     //read
