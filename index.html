@@ -1,14 +1,59 @@
 <!doctype html> 
-<title>Cloaker</title>
-<style>
-input{display: block;}
-</style>
+<title>Cloak - Encode your binary files to base64 text and decode them back to
+  binary</title>
+<link href="main.css" rel="stylesheet" />
 
-<input type=file id=file />
-<button id=encode>Encode</button>
-<button id=decode>Decode</button>
+<body>
+<div id="wrapper">
+  <h1>
+    Cloak
+    <small>
+      Binary => Base64 and Base64 => Binary
+    </small>
+  </h1>
 
-Image
-<img src='' />
+  <div class="form">
+    <label for=file>
+      Input file
+    </label>
+    <input type=file id=file />
+    <button id=encode>Encode</button>
+    <button id=decode>Decode</button>
+  </div>
 
+  <div class=footer>
+    <p>Encodes(Cloaks) your binary files into base64 text files and then can decode
+    them back to their binary versions.</p>
+
+    <h2>Motivation</h2>
+    <p>Many enterprise email setups don't allow sending of binary files. You can now
+    encode it to a base64 file send it via email and then decode it back on the
+    destination.</p>
+
+    <h2>FAQ</h2>
+
+    <ol>
+      <li>Does my file get uploaded to a server?
+      No, all of the encoding/decoding happens on your computer. The javascript
+      itself is pretty straightforward, you can dig into it and see what is going on.
+      If you still don't trust me, unplug your network cable while encoding/decoding :)</li>
+    </ol>
+
+    The source code for this can be found at <a href='https://github.com/minhajuddin/cloak'>github.com/minhajuddin/cloak</a>
+
+    <h2>Save for local use</h2>
+    <p>
+    This file is self-contained, it has all the javascript/css embedded in it.
+    You can save this file and email it to yourself if your destination doesn't
+    have access to this site. Just right click and click on 'Save link as...' to save
+    this file.
+    <a href='/index.html' download='cloak.html'>Link to this file</a>
+    </p>
+  </div>
+
+
+
+</div>
 <script src='main.js'></script>
+</body>
+

@@ -17,10 +17,10 @@ destination.
   If you still don't trust me, unplug your network cable while encoding/decoding :)
 
 ## TODO
-  [*] Core functionality.
-  [ ] Ability to copy the base64 string from a textarea if it is small.
-  [ ] Ability to paste a base64 string into a textarea and download a binary.
-  [ ] Embed the original filename and md5sum while encoding and verify it while decoding.
+  -[x] Core functionality.
+  -[ ] Ability to copy the base64 string from a textarea if it is small.
+  -[ ] Ability to paste a base64 string into a textarea and download a binary.
+  -[ ] Embed the original filename and md5sum while encoding and verify it while decoding.
 
 ## Development
 After adding your features, please encode a big file (>10MB) and decode it and
