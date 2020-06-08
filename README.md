@@ -3,7 +3,7 @@ Encodes(Cloaks) your binary files into base64 text files and then can decode
 them back to their binary versions.
 
 ## Website
-You can use http://cloak.websrvr.in/ to encode/decode your data.
+You can use https://base64-file-encode-decode.minhajuddin.com/ to encode/decode your data.
 
 ## Motivation
 Many enterprise email setups don't allow sending of binary files. You can now
